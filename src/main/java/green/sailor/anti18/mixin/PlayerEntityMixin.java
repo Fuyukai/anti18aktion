@@ -40,7 +40,7 @@ abstract class PlayerEntityMixin {
             int hunger = fc.getHunger();
 
             StatusEffectInstance se = new StatusEffectInstance(StatusEffects.REGENERATION, 20 * hunger, 1);
-            us.addPotionEffect(se);
+            us.addStatusEffect(se);
         }
     }
 
@@ -52,7 +52,7 @@ abstract class PlayerEntityMixin {
     @Inject(method = "canConsume", at = @At("HEAD"), cancellable = true)
     void fixedCanConsume(boolean boolean_1, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity us = (PlayerEntity)(Object) this;
-        boolean can = !us.abilities.invulnerable && (boolean_1 || us.getHealth() < us.getHealthMaximum());
+        boolean can = !us.abilities.invulnerable && (boolean_1 || us.getHealth() < us.getMaxHealth());
         cir.setReturnValue(can);
     }
 
